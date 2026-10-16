@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "GLPwnIou"
+version = "1.0.0"
+description = "Rogue Man-in-The-Middle GLPI server used to obtain RCE on managed devices. For AUTHORIZED USE only"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Raphael LACROIX - Fenrisk", email = "contact@fenrisk.com" },
+]
+keywords = ["glpi", "security", "pentest", "red-team", "mitm", "esc17"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://fenrisk.com/research/esc17-glpi"
+Repository = "https://github.com/FenriskSecurity/glpwniou"
+
+[project.scripts]
+glpwniou = "GLPwnIou:main"
+
+[tool.hatch.build.targets.wheel]
+include = ["GLPwnIou.py"]
+
+[tool.hatch.build.targets.sdist]
+include = ["GLPwnIou.py", "README.md", "LICENSE"]
