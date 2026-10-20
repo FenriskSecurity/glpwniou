@@ -1,6 +1,6 @@
 # GLPwnIou
 
-Rogue Man-in-The-Middle GLPI server used to obtain RCE on managed devices. This tool takes advantage of the https://help.glpi-project.org/tutorials/inventory/glpiinventory_deploy feature, which enables a GLPI server to push updates (binaries and/or commands) to a managed Linux or windows host.
+Rogue Man-in-The-Middle GLPI server used to obtain RCE on managed devices. This tool takes advantage of the [glpiinventory_deploy](https://help.glpi-project.org/tutorials/inventory/glpiinventory_deploy) feature, which enables a GLPI server to push updates (binaries and/or commands) to a managed Linux or windows host.
 
 Prerequisites :
 

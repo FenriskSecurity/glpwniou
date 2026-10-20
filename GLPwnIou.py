@@ -119,7 +119,11 @@ def _clip(data, limit=2048):
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "Apache"
+    server_version = "Apache/2.4.41 (Ubuntu)"
+
+    def version_string(self):
+        # default impl appends sys_version ("Python/x.y.z"), which would leak us
+        return self.server_version
 
     def _decompress(self, data):
         # GLPI-Agent compresses request bodies and flags the codec via
